@@ -11,6 +11,7 @@
 
 typedef DialogMessageButton (*AboutDialogScreen)(DialogsApp* dialogs, DialogMessage* message);
 
+/*
 static DialogMessageButton about_screen_product(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
@@ -192,8 +193,37 @@ static DialogMessageButton about_screen_fw_version(DialogsApp* dialogs, DialogMe
 
     return result;
 }
+*/
+
+// Own Code
+static DialogMessageButton about_own_firmware(DialogsApp* dialogs, DialogMessage* message) {
+    DialogMessageButton result;
+
+    const char* screen_text = "Martin L. - ATecD\n";
+
+    dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
+    result = dialog_message_show(dialogs, message);
+
+    return result;
+}
+
+static DialogMessageButton about_details(DialogsApp* dialogs, DialogMessage* message) {
+    DialogMessageButton result;
+
+    const char* screen_text = "Here are no Details yet\n";
+
+    dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
+    result = dialog_message_show(dialogs, message);
+
+    return result;
+}
+
+
 
 const AboutDialogScreen about_screens[] = {
+    about_own_firmware,
+    about_details
+    /*
     about_screen_product,
     about_screen_compliance,
     about_screen_address,
@@ -204,7 +234,9 @@ const AboutDialogScreen about_screens[] = {
     about_screen_cert_taiwan,
     about_screen_cert_mexico,
     about_screen_hw_version,
-    about_screen_fw_version};
+    about_screen_fw_version
+    */
+};
 
 int32_t about_settings_app(void* p) {
     UNUSED(p);
