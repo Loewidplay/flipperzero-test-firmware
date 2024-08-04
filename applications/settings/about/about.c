@@ -12,33 +12,6 @@
 typedef DialogMessageButton (*AboutDialogScreen)(DialogsApp* dialogs, DialogMessage* message);
 
 /*
-static DialogMessageButton about_screen_product(DialogsApp* dialogs, DialogMessage* message) {
-    DialogMessageButton result;
-
-    FuriString* screen_header = furi_string_alloc_printf(
-        "Product: %s\n"
-        "Model: %s",
-        furi_hal_version_get_model_name(),
-        furi_hal_version_get_model_code());
-
-    FuriString* screen_text = furi_string_alloc_printf(
-        "FCC ID: %s\n"
-        "IC: %s",
-        furi_hal_version_get_fcc_id(),
-        furi_hal_version_get_ic_id());
-
-    dialog_message_set_header(
-        message, furi_string_get_cstr(screen_header), 0, 0, AlignLeft, AlignTop);
-    dialog_message_set_text(
-        message, furi_string_get_cstr(screen_text), 0, 26, AlignLeft, AlignTop);
-    result = dialog_message_show(dialogs, message);
-
-    furi_string_free(screen_header);
-    furi_string_free(screen_text);
-
-    return result;
-}
-
 static DialogMessageButton about_screen_address(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
@@ -195,6 +168,33 @@ static DialogMessageButton about_screen_fw_version(DialogsApp* dialogs, DialogMe
 }
 */
 
+static DialogMessageButton about_screen_product(DialogsApp* dialogs, DialogMessage* message) {
+    DialogMessageButton result;
+
+    FuriString* screen_header = furi_string_alloc_printf(
+        "Product: %s\n"
+        "Model: %s",
+        furi_hal_version_get_model_name(),
+        furi_hal_version_get_model_code());
+
+    FuriString* screen_text = furi_string_alloc_printf(
+        "FCC ID: %s\n"
+        "IC: %s",
+        furi_hal_version_get_fcc_id(),
+        furi_hal_version_get_ic_id());
+
+    dialog_message_set_header(
+        message, furi_string_get_cstr(screen_header), 0, 0, AlignLeft, AlignTop);
+    dialog_message_set_text(
+        message, furi_string_get_cstr(screen_text), 0, 26, AlignLeft, AlignTop);
+    result = dialog_message_show(dialogs, message);
+
+    furi_string_free(screen_header);
+    furi_string_free(screen_text);
+
+    return result;
+}
+
 // Own Code
 static DialogMessageButton about_own_firmware(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
@@ -222,9 +222,9 @@ static DialogMessageButton about_details(DialogsApp* dialogs, DialogMessage* mes
 
 const AboutDialogScreen about_screens[] = {
     about_own_firmware,
-    about_details
+    about_details,
+    about_screen_product
     /*
-    about_screen_product,
     about_screen_compliance,
     about_screen_address,
     about_screen_icon1,
